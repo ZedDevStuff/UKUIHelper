@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace UKUIHelper
 {
-    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "1.0.0")]
+    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.5.0")]
     public class UIHelper : BaseUnityPlugin
     {
         GameObject _button,_text,_panel,_image,_toggle,_scrollview,_dropdown,_inputField,_slider,_scrollbar;
