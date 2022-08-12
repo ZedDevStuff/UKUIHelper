@@ -14,7 +14,6 @@
           "BepInEx.PluginInfoProps": "1.1.0",
           "NETStandard.Library": "2.0.3",
           "UnityEngine.Modules": "2019.4.16",
-          "Unity.TextMeshPro": "0.0.0.0",
           "UnityEngine.UI": "1.0.0.0"
         },
         "runtime": {
@@ -387,14 +386,6 @@
         }
       },
       "UnityEngine.Modules/2019.4.16": {},
-      "Unity.TextMeshPro/0.0.0.0": {
-        "runtime": {
-          "Unity.TextMeshPro.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "UnityEngine.UI/1.0.0.0": {
         "runtime": {
           "UnityEngine.UI.dll": {
@@ -683,11 +674,6 @@
       "sha512": "sha512-Sh8A3qAa0p6X0r3wxbMcnTWElR01WkPdx4IdkjvBbjmwfI4MFOV/nxSqCO153a3do9m5tnRu/0YszCvozM86fg==",
       "path": "unityengine.modules/2019.4.16",
       "hashPath": "unityengine.modules.2019.4.16.nupkg.sha512"
-    },
-    "Unity.TextMeshPro/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
     },
     "UnityEngine.UI/1.0.0.0": {
       "type": "reference",

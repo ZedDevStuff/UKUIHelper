@@ -11,4 +11,3 @@ C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\obj\Debug\netstandard2.
 C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\obj\Debug\netstandard2.0\UKUIHelper.csproj.CopyComplete
 C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\obj\Debug\netstandard2.0\UKUIHelper.dll
 C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\obj\Debug\netstandard2.0\UKUIHelper.pdb
-C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\bin\Debug\netstandard2.0\Unity.TextMeshPro.dll

@@ -153,7 +153,6 @@ namespace UKUIHelper
         private static UIHelper instance;
 
         private string path,workDir;
-        private bool isTMPPresent = false;
         private ConfigEntry<bool> tryUseTMP;
         private void Awake()
         {
@@ -184,7 +183,6 @@ namespace UKUIHelper
         }
         public static GameObject CreateButton()
         {
-            bool tmp = instance.isTMPPresent;
             GameObject blank = new GameObject();
             blank.name = "Button";
             blank.AddComponent<RectTransform>();
@@ -213,7 +211,6 @@ namespace UKUIHelper
         }
         public static GameObject CreateText()
         {
-            bool tmp = instance.isTMPPresent;
             GameObject blank = new GameObject();
             blank.name = "Text";
             blank.AddComponent<RectTransform>();
@@ -245,7 +242,6 @@ namespace UKUIHelper
         }*/
         public static GameObject CreateInputField()
         {
-            bool tmp = instance.isTMPPresent;
             GameObject blank = CreateImage();
             blank.name = "InputField";
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,40);
