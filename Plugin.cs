@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.TextCore;
 using UnityEngine.UI;
-using TMPro;
 
 namespace UKUIHelper
 {
@@ -17,7 +16,7 @@ namespace UKUIHelper
     public class UIHelper : BaseUnityPlugin
     {
         GameObject _button,_text,_panel,_image,_toggle,_scrollview,_dropdown,_inputField,_slider,_scrollbar;
-        Sprite sprite;
+        Sprite sprite,checkMarkSprite,dropDownSprite;
         public GameObject button
         {
             get
@@ -139,19 +138,7 @@ namespace UKUIHelper
                 sprite = value;
             }
         }
-        TMP_FontAsset _TMPfont;
         Font _font;
-        public TMP_FontAsset TMPfont
-        {
-            get
-            {
-                return _TMPfont;
-            }
-            private set
-            {
-                _TMPfont = value;
-            }
-        }
         public Font font
         {
             get
@@ -172,50 +159,15 @@ namespace UKUIHelper
         {
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += Scene;
             instance = this;
-            tryUseTMP = Config.Bind("UK UI Helper", "Try TMP", false, "Try to use TextMeshPro if available. WARNING: This doesn't work right now.");
             path = System.Reflection.Assembly.GetAssembly(typeof(UIHelper)).Location;
             workDir = Path.GetDirectoryName(path);
             string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll",SearchOption.AllDirectories);
-            if(tryUseTMP.Value)
-            {
-                Logger.LogInfo("Trying to use TextMeshPro");
-                foreach (string file in files)
-                {
-                    if(file.Contains("Unity.TextMeshPro"))
-                    {
-                        isTMPPresent = true;
-                    }
-                }
-                if(isTMPPresent)
-                {
-                    Logger.LogInfo("TMP is present, proceeding");
-                    Logger.LogInfo("Loading TMP font...");
-                    TMPfont = TMP_FontAsset.CreateFontAsset(Resources.GetBuiltinResource<Font>("Arial.ttf"));
-                    Logger.LogInfo("Done");
-                }
-                else
-                {
-                    Logger.LogInfo("Could not find TMP, proceeding");
-                    Logger.LogInfo("Loading font...");
-                    font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-                    Logger.LogInfo("Done");
-                }
-            }
-            else
-            {
-                Logger.LogInfo("Ignoring TMP, proceeding");
-                isTMPPresent = false;
-                Logger.LogInfo("Loading font...");
-                font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-                Logger.LogInfo("Done");
-            }
-            
-            
-            Logger.LogInfo("Loading sprite");
+            Logger.LogInfo("Loading UI ressources");
+            font = Resources.GetBuiltinResource<Font>("Arial.ttf");
             Texture2D texture = new Texture2D(200, 200);
             texture.LoadImage(File.ReadAllBytes(workDir + "\\Sprite.png")); 
             sprite = Sprite.Create(texture, new Rect(0, 0, 200, 200), new Vector2(0.5f, 0.5f),200f,0,SpriteMeshType.Tight,new Vector4(15,15,15,15));
-            Logger.LogInfo("Sprite loaded");
+            Logger.LogInfo("Done");
         }
         void Scene(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
         {
@@ -246,27 +198,17 @@ namespace UKUIHelper
             blank.GetComponent<Image>().sprite = instance.sprite;
             blank.GetComponent<Image>().type = Image.Type.Sliced;
             blank.GetComponent<Button>().targetGraphic = blank.GetComponent<Image>();
+
             GameObject text = CreateText();
             text.name = "Text";
             text.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
             text.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
             text.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
             text.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            if(tmp)
-            {
-                text.GetComponent<TMP_Text>().text = "Button";
-                text.GetComponent<TMP_Text>().fontSize = 32;
-                text.GetComponent<TMP_Text>().alignment = TextAlignmentOptions.Center;
-                text.GetComponent<TMP_Text>().color = Color.black;
-
-            }
-            else
-            {
-                text.GetComponent<Text>().text = "Button";
-                text.GetComponent<Text>().fontSize = 32;
-                text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-                text.GetComponent<Text>().color = Color.black;
-            }
+            text.GetComponent<Text>().text = "Button";
+            text.GetComponent<Text>().fontSize = 32;
+            text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            text.GetComponent<Text>().color = Color.black;
             return blank;
         }
         public static GameObject CreateText()
@@ -280,24 +222,12 @@ namespace UKUIHelper
             blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
             blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
             blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
-            if(tmp)
-            {
-                blank.AddComponent<TextMeshProUGUI>();
-                blank.GetComponent<TMP_Text>().text = "Text";
-                blank.GetComponent<TMP_Text>().font = instance.TMPfont;
-                blank.GetComponent<TMP_Text>().fontSize = 32;
-                blank.GetComponent<TMP_Text>().alignment = TextAlignmentOptions.Center;
-                blank.GetComponent<TMP_Text>().color = Color.black;
-            }
-            else
-            {
-                blank.AddComponent<Text>();
-                blank.GetComponent<Text>().text = "Text";
-                blank.GetComponent<Text>().font = instance.font;
-                blank.GetComponent<Text>().fontSize = 32;
-                blank.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-                blank.GetComponent<Text>().color = Color.black;
-            }
+            blank.AddComponent<Text>();
+            blank.GetComponent<Text>().text = "Text";
+            blank.GetComponent<Text>().font = instance.font;
+            blank.GetComponent<Text>().fontSize = 32;
+            blank.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            blank.GetComponent<Text>().color = Color.black;
             return blank;
         }
         /*public static GameObject CreateDropdown()
@@ -311,14 +241,6 @@ namespace UKUIHelper
             blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
             blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
             blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
-            if(tmp)
-            {
-
-            }
-            else
-            {
-                
-            }
             return blank;
         }*/
         public static GameObject CreateInputField()
@@ -347,41 +269,20 @@ namespace UKUIHelper
             text.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
             text.GetComponent<RectTransform>().sizeDelta = new Vector2(-20,0);
 
-            if(tmp)
-            {
-                placeholder.GetComponent<TMP_Text>().fontSize = 20;
-                placeholder.GetComponent<TMP_Text>().fontStyle = TMPro.FontStyles.Italic;
-                placeholder.GetComponent<TMP_Text>().color = new Color(0,0,0,0.5f);
-                placeholder.GetComponent<TMP_Text>().text = "Enter text...";
+            placeholder.GetComponent<Text>().fontSize = 20;
+            placeholder.GetComponent<Text>().fontStyle = FontStyle.Italic;
+            placeholder.GetComponent<Text>().color = new Color(0,0,0,0.5f);
+            placeholder.GetComponent<Text>().text = "Enter text...";
 
-                text.GetComponent<TMP_Text>().fontSize = 20;
-                text.GetComponent<TMP_Text>().fontStyle = TMPro.FontStyles.Normal;
-                text.GetComponent<TMP_Text>().color = new Color(0,0,0,1);
-                text.GetComponent<TMP_Text>().text = "";
+            text.GetComponent<Text>().fontSize = 20;
+            text.GetComponent<Text>().fontStyle = FontStyle.Normal;
+            text.GetComponent<Text>().color = new Color(0,0,0,1);
+            text.GetComponent<Text>().text = "";
 
-                blank.AddComponent<TMP_InputField>();
-                blank.GetComponent<TMP_InputField>().textComponent = text.GetComponent<TMP_Text>();
-                blank.GetComponent<TMP_InputField>().placeholder = placeholder.GetComponent<TMP_Text>();
-                blank.GetComponent<TMP_InputField>().textViewport = blank.GetComponent<RectTransform>();
-                blank.GetComponent<TMP_InputField>().targetGraphic = blank.GetComponent<Image>();
-            }
-            else
-            {
-                placeholder.GetComponent<Text>().fontSize = 20;
-                placeholder.GetComponent<Text>().fontStyle = FontStyle.Italic;
-                placeholder.GetComponent<Text>().color = new Color(0,0,0,0.5f);
-                placeholder.GetComponent<Text>().text = "Enter text...";
-
-                text.GetComponent<Text>().fontSize = 20;
-                text.GetComponent<Text>().fontStyle = FontStyle.Normal;
-                text.GetComponent<Text>().color = new Color(0,0,0,1);
-                text.GetComponent<Text>().text = "";
-
-                blank.AddComponent<InputField>();
-                blank.GetComponent<InputField>().textComponent = text.GetComponent<Text>();
-                blank.GetComponent<InputField>().placeholder = placeholder.GetComponent<Text>();
-                blank.GetComponent<InputField>().targetGraphic = blank.GetComponent<Image>();
-            }
+            blank.AddComponent<InputField>();
+            blank.GetComponent<InputField>().textComponent = text.GetComponent<Text>();
+            blank.GetComponent<InputField>().placeholder = placeholder.GetComponent<Text>();
+            blank.GetComponent<InputField>().targetGraphic = blank.GetComponent<Image>();
             return blank;
         }
         public static GameObject CreatePanel()

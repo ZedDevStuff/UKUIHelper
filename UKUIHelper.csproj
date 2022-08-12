@@ -19,9 +19,7 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>lib\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="TMPro">
-      <HintPath>lib\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
+    <Content Include="Sprites\**"/>
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
