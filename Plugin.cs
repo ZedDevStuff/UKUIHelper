@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace UKUIHelper
 {
-    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.5.0")]
+    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.5.1")]
     public class UIHelper : BaseUnityPlugin
     {
         GameObject _button,_text,_panel,_image,_toggle,_scrollview,_dropdown,_inputField,_slider,_scrollbar;
@@ -163,9 +163,15 @@ namespace UKUIHelper
             string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll",SearchOption.AllDirectories);
             Logger.LogInfo("Loading UI ressources");
             font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            Texture2D texture = new Texture2D(200, 200);
-            texture.LoadImage(File.ReadAllBytes(workDir + "\\Sprite.png")); 
-            sprite = Sprite.Create(texture, new Rect(0, 0, 200, 200), new Vector2(0.5f, 0.5f),200f,0,SpriteMeshType.Tight,new Vector4(15,15,15,15));
+            Texture2D texture1 = new Texture2D(200, 200);
+            Texture2D texture2 = new Texture2D(64, 64);
+            Texture2D texture3 = new Texture2D(64, 64);
+            texture1.LoadImage(File.ReadAllBytes(workDir + "\\Sprite.png")); 
+            sprite = Sprite.Create(texture1, new Rect(0, 0, 200, 200), new Vector2(0.5f, 0.5f),200f,0,SpriteMeshType.Tight,new Vector4(15,15,15,15));
+            texture2.LoadImage(File.ReadAllBytes(workDir + "\\Checkmark.png")); 
+            checkMarkSprite = Sprite.Create(texture2, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f),64f,0,SpriteMeshType.Tight);
+            texture3.LoadImage(File.ReadAllBytes(workDir + "\\Dropdown.png")); 
+            dropDownSprite = Sprite.Create(texture3, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f),64f,0,SpriteMeshType.Tight);
             Logger.LogInfo("Done");
         }
         void Scene(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
@@ -175,11 +181,14 @@ namespace UKUIHelper
                 Logger.LogInfo("Main scene loaded");
             }
         }
-        public static Sprite LoadSprite(Vector4 border)
+        /// <summary>
+        /// Loads a sprite from a file
+        /// </summary>
+        public static Sprite LoadSprite(string path,Vector4 border,float pixelsPerUnit)
         {
             Texture2D texture = new Texture2D(200, 200);
-            texture.LoadImage(File.ReadAllBytes(instance.workDir + "\\Sprite.png"));
-            return Sprite.Create(texture, new Rect(0, 0,texture.width,texture.height),new Vector2(0.5f, 0.5f),100f,0,SpriteMeshType.Tight,border);
+            texture.LoadImage(File.ReadAllBytes(path));
+            return Sprite.Create(texture, new Rect(0, 0,texture.width,texture.height),new Vector2(0.5f, 0.5f),pixelsPerUnit,0,SpriteMeshType.Tight,border);
         }
         public static GameObject CreateButton()
         {
@@ -329,11 +338,11 @@ namespace UKUIHelper
             GameObject checkmark = CreateImage();
             checkmark.name = "Checkmark";
             checkmark.GetComponent<RectTransform>().SetParent(background.GetComponent<RectTransform>());
-            checkmark.GetComponent<RectTransform>().sizeDelta = new Vector2(-14,-14);
-            checkmark.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            checkmark.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            checkmark.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
+            checkmark.GetComponent<RectTransform>().SetAnchor(AnchorPresets.StretchAll);
+            checkmark.GetComponent<RectTransform>().offsetMin = new Vector2(5,5);
+            checkmark.GetComponent<RectTransform>().offsetMax = new Vector2(-5,-5);
             checkmark.GetComponent<Image>().color = Color.black;
+            checkmark.GetComponent<Image>().sprite = instance.checkMarkSprite;
 
             blank.GetComponent<Toggle>().targetGraphic = background.GetComponent<Image>();
             blank.GetComponent<Toggle>().graphic = checkmark.GetComponent<Image>();
