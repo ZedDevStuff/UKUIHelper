@@ -17,10 +17,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\lib\UnityEngine.UI.dll</HintPath>
+      <HintPath>lib\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="TMPro">
-      <HintPath>C:\Users\Junior\Documents\UnityMods\Ultrakill\UKUIHelper\lib\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>lib\Unity.TextMeshPro.dll</HintPath>
     </Reference>
   </ItemGroup>
   
