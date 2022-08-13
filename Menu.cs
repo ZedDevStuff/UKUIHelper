@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Helper class for creating menus
 /// </summary>
 public class Menu
 {
