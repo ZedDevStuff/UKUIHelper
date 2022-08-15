@@ -16,17 +16,6 @@ namespace UKUIHelper
     public class UIHelper : BaseUnityPlugin
     {
         private Sprite sprite,checkMarkSprite,dropDownSprite;
-        private GameObject button;
-        private GameObject text;
-        private GameObject panel;
-        private GameObject image;
-        private GameObject toggle;
-        private GameObject scrollview;
-        private GameObject dropdown;
-        private GameObject inputField;
-        private GameObject slider;
-        private GameObject scrollbar;
-        private Sprite Uisprite; 
         private Font font;
         
         private static UIHelper instance;
