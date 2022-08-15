@@ -12,144 +12,23 @@ using UnityEngine.UI;
 
 namespace UKUIHelper
 {
-    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.6.0")]
+    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.6.1")]
     public class UIHelper : BaseUnityPlugin
     {
-        GameObject _button,_text,_panel,_image,_toggle,_scrollview,_dropdown,_inputField,_slider,_scrollbar;
-        Sprite sprite,checkMarkSprite,dropDownSprite;
-        public GameObject button
-        {
-            get
-            {
-                return _button;
-            }
-            private set
-            {
-                _button = value;
-            }
-        }
-        public GameObject text
-        {
-            get
-            {
-                return _text;
-            }
-            private set
-            {
-                _text = value;
-            }
-        }
-        public GameObject panel
-        {
-            get
-            {
-                return _panel;
-            }
-            private set
-            {
-                _panel = value;
-            }
-        }
-        public GameObject image
-        {
-            get
-            {
-                return _image;
-            }
-            private set
-            {
-                _image = value;
-            }
-        }
-        public GameObject toggle
-        {
-            get
-            {
-                return _toggle;
-            }
-            private set
-            {
-                _toggle = value;
-            }
-        }
-        public GameObject scrollview
-        {
-            get
-            {
-                return _scrollview;
-            }
-            private set
-            {
-                _scrollview = value;
-            }
-        }
-        public GameObject dropdown
-        {
-            get
-            {
-                return _dropdown;
-            }
-            private set
-            {
-                _dropdown = value;
-            }
-        }
-        public GameObject inputField
-        {
-            get
-            {
-                return _inputField;
-            }
-            private set
-            {
-                _inputField = value;
-            }
-        }
-        public GameObject slider
-        {
-            get
-            {
-                return _slider;
-            }
-            private set
-            {
-                _slider = value;
-            }
-        }
-        public GameObject scrollbar
-        {
-            get
-            {
-                return _scrollbar;
-            }
-            private set
-            {
-                _scrollbar = value;
-            }
-        }
-        public Sprite Uisprite 
-        {
-            get
-            {
-                return sprite;
-            }
-            private set
-            {
-                sprite = value;
-            }
-        }
-        Font _font;
-        public Font font
-        {
-            get
-            {
-                return _font;
-            }
-            private set
-            {
-                _font = value;
-            }
-        }
+        private Sprite sprite,checkMarkSprite,dropDownSprite;
+        private GameObject button;
+        private GameObject text;
+        private GameObject panel;
+        private GameObject image;
+        private GameObject toggle;
+        private GameObject scrollview;
+        private GameObject dropdown;
+        private GameObject inputField;
+        private GameObject slider;
+        private GameObject scrollbar;
+        private Sprite Uisprite; 
+        private Font font;
+        
         private static UIHelper instance;
 
         private string path,workDir;
