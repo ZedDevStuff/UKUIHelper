@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace UKUIHelper
 {
-    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.5.3")]
+    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.6.0")]
     public class UIHelper : BaseUnityPlugin
     {
         GameObject _button,_text,_panel,_image,_toggle,_scrollview,_dropdown,_inputField,_slider,_scrollbar;
@@ -467,6 +467,24 @@ namespace UKUIHelper
             
             blank.GetComponent<Scrollbar>().handleRect = handle.GetComponent<RectTransform>();
             blank.GetComponent<Scrollbar>().targetGraphic = handle.GetComponent<Image>();
+            return blank;
+        }
+        public static GameObject CreateOverlay(bool persistent = false)
+        {
+            GameObject blank = new GameObject();
+            blank.name = "Overlay";
+            blank.AddComponent<Canvas>();
+            blank.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            blank.GetComponent<Canvas>().sortingOrder = 1000;
+            blank.AddComponent<CanvasScaler>();
+            blank.AddComponent<GraphicRaycaster>();
+            blank.GetComponent<CanvasScaler>().screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            blank.GetComponent<CanvasScaler>().matchWidthOrHeight = 0f;
+            blank.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920,1080);
+            if(persistent)
+            {
+                DontDestroyOnLoad(blank);
+            }
             return blank;
         }
     }
