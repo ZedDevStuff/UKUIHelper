@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace UKUIHelper
 {
-    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.6.1")]
+    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.6.2")]
     public class UIHelper : BaseUnityPlugin
     {
         private Sprite sprite,checkMarkSprite,dropDownSprite;
@@ -66,9 +66,8 @@ namespace UKUIHelper
             blank.AddComponent<Image>();
             blank.AddComponent<Button>();
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,50);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             blank.GetComponent<Image>().sprite = instance.sprite;
             blank.GetComponent<Image>().type = Image.Type.Sliced;
             blank.GetComponent<Button>().targetGraphic = blank.GetComponent<Image>();
@@ -76,9 +75,8 @@ namespace UKUIHelper
             GameObject text = CreateText();
             text.name = "Text";
             text.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
-            text.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            text.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
-            text.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
+            text.GetComponent<RectTransform>().SetAnchor(AnchorPresets.StretchAll);
+            text.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             text.GetComponent<Text>().text = "Button";
             text.GetComponent<Text>().fontSize = 32;
             text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
@@ -92,9 +90,8 @@ namespace UKUIHelper
             blank.AddComponent<RectTransform>();
             blank.AddComponent<CanvasRenderer>();
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,50);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             blank.AddComponent<Text>();
             blank.GetComponent<Text>().text = "Text";
             blank.GetComponent<Text>().font = instance.font;
@@ -121,9 +118,8 @@ namespace UKUIHelper
             GameObject blank = CreateImage();
             blank.name = "InputField";
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,40);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             
             GameObject placeholder = CreateText();
             placeholder.name = "Placeholder";
@@ -136,9 +132,8 @@ namespace UKUIHelper
             GameObject text = CreateText();
             text.name = "Text";
             text.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
-            text.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            text.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
-            text.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
+            text.GetComponent<RectTransform>().SetAnchor(AnchorPresets.StretchAll);
+            text.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             text.GetComponent<RectTransform>().sizeDelta = new Vector2(-20,0);
 
             placeholder.GetComponent<Text>().fontSize = 20;
@@ -162,9 +157,8 @@ namespace UKUIHelper
             GameObject blank = CreateImage();
             blank.name = "Panel";
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,200);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             blank.GetComponent<Image>().color = Color.white;
             return blank;
         }
@@ -175,9 +169,8 @@ namespace UKUIHelper
             blank.AddComponent<RectTransform>();
             blank.AddComponent<CanvasRenderer>();
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,200);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             blank.AddComponent<Image>();
             blank.GetComponent<Image>().sprite = instance.sprite;
             blank.GetComponent<Image>().type = Image.Type.Sliced;
@@ -190,17 +183,15 @@ namespace UKUIHelper
             blank.AddComponent<RectTransform>();
             blank.AddComponent<Toggle>();
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(30,30);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
 
             GameObject background = CreateImage();
             background.name = "Background";
             background.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
             background.GetComponent<RectTransform>().sizeDelta = new Vector2(30,30);
-            background.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            background.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            background.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
+            background.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            background.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
 
             GameObject checkmark = CreateImage();
             checkmark.name = "Checkmark";
@@ -236,9 +227,8 @@ namespace UKUIHelper
             blank.AddComponent<CanvasRenderer>();
             blank.AddComponent<Slider>();
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(160,20);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
 
             GameObject background = CreateImage();
             background.name = "Background";
@@ -253,7 +243,7 @@ namespace UKUIHelper
             fillArea.name = "Fill Area";
             fillArea.AddComponent<RectTransform>();
             fillArea.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
-            fillArea.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
+            fillArea.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             fillArea.GetComponent<RectTransform>().anchorMin = new Vector2(0,0.25f);
             fillArea.GetComponent<RectTransform>().anchorMax = new Vector2(1,0.75f);
             fillArea.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5,0);
@@ -265,9 +255,8 @@ namespace UKUIHelper
             fill.AddComponent<RectTransform>();
             fill.AddComponent<CanvasRenderer>();
             fill.GetComponent<RectTransform>().SetParent(fillArea.GetComponent<RectTransform>());
-            fill.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            fill.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            fill.GetComponent<RectTransform>().anchorMax = new Vector2(0,1);
+            fill.GetComponent<RectTransform>().SetAnchor(AnchorPresets.VertStretchLeft);
+            fill.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             fill.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
             fill.GetComponent<RectTransform>().sizeDelta = new Vector2(10,0);
             fill.GetComponent<RectTransform>().localPosition = new Vector3(-70,0,0);
@@ -276,9 +265,8 @@ namespace UKUIHelper
             handleSlideArea.name = "Handle Slide Area";
             handleSlideArea.AddComponent<RectTransform>();
             handleSlideArea.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
-            handleSlideArea.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            handleSlideArea.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            handleSlideArea.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
+            handleSlideArea.GetComponent<RectTransform>().SetAnchor(AnchorPresets.StretchAll);
+            handleSlideArea.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             handleSlideArea.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
             handleSlideArea.GetComponent<RectTransform>().sizeDelta = new Vector2(-20,0);
             handleSlideArea.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
@@ -289,9 +277,8 @@ namespace UKUIHelper
             handle.AddComponent<CanvasRenderer>();
             handle.AddComponent<Image>();
             handle.GetComponent<RectTransform>().SetParent(handleSlideArea.GetComponent<RectTransform>());
-            handle.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            handle.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            handle.GetComponent<RectTransform>().anchorMax = new Vector2(0,1);
+            handle.GetComponent<RectTransform>().SetAnchor(AnchorPresets.VertStretchLeft);
+            handle.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             handle.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
             handle.GetComponent<RectTransform>().sizeDelta = new Vector2(20,0);
             handle.GetComponent<RectTransform>().localPosition = new Vector3(-70,0,0);
@@ -307,18 +294,16 @@ namespace UKUIHelper
             blank.name = "Scrollbar";
             blank.AddComponent<Scrollbar>();
             blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,20);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            blank.GetComponent<RectTransform>().SetAnchor(AnchorPresets.MiddleCenter);
+            blank.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             blank.GetComponent<Image>().color = new Color32(200,200,200,255);
 
             GameObject slidingArea = new GameObject();
             slidingArea.name = "Sliding Area";
             slidingArea.AddComponent<RectTransform>();
             slidingArea.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
-            slidingArea.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            slidingArea.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-            slidingArea.GetComponent<RectTransform>().anchorMax = new Vector2(1,1);
+            slidingArea.GetComponent<RectTransform>().SetAnchor(AnchorPresets.StretchAll);
+            slidingArea.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             slidingArea.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
             slidingArea.GetComponent<RectTransform>().sizeDelta = new Vector2(-20,-20);
             slidingArea.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
@@ -326,7 +311,7 @@ namespace UKUIHelper
             GameObject handle = CreateImage();
             handle.name = "Handle";
             handle.GetComponent<RectTransform>().SetParent(slidingArea.GetComponent<RectTransform>());
-            handle.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
+            handle.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             handle.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
             handle.GetComponent<RectTransform>().anchorMax = new Vector2(0.05f,1);
             handle.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
