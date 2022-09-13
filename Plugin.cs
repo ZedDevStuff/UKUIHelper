@@ -12,9 +12,10 @@ using UnityEngine.UI;
 
 namespace UKUIHelper
 {
-    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.6.2")]
+    [BepInPlugin("zed.uk.uihelper", "UK UI Helper", "0.7.0")]
     public class UIHelper : BaseUnityPlugin
     {
+        private DefaultControls.Resources resources;
         private Sprite sprite,checkMarkSprite,dropDownSprite;
         private Font font;
         
@@ -24,6 +25,7 @@ namespace UKUIHelper
         private void Awake()
         {
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += Scene;
+            resources = new DefaultControls.Resources();
             instance = this;
             path = System.Reflection.Assembly.GetAssembly(typeof(UIHelper)).Location;
             workDir = Path.GetDirectoryName(path);
@@ -39,6 +41,9 @@ namespace UKUIHelper
             checkMarkSprite = Sprite.Create(texture2, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f),64f,0,SpriteMeshType.Tight);
             texture3.LoadImage(File.ReadAllBytes(workDir + "\\Sprites\\Dropdown.png")); 
             dropDownSprite = Sprite.Create(texture3, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f),64f,0,SpriteMeshType.Tight);
+            resources.background = sprite;
+            resources.checkmark = checkMarkSprite;
+            resources.dropdown = dropDownSprite;
             Logger.LogInfo("Done");
         }
         void Scene(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
@@ -76,6 +81,7 @@ namespace UKUIHelper
             text.name = "Text";
             text.GetComponent<RectTransform>().SetParent(blank.GetComponent<RectTransform>());
             text.GetComponent<RectTransform>().SetAnchor(AnchorPresets.StretchAll);
+            text.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
             text.GetComponent<RectTransform>().SetPivot(PivotPresets.MiddleCenter);
             text.GetComponent<Text>().text = "Button";
             text.GetComponent<Text>().fontSize = 32;
@@ -100,19 +106,17 @@ namespace UKUIHelper
             blank.GetComponent<Text>().color = Color.black;
             return blank;
         }
-        /*public static GameObject CreateDropdown()
+        public static GameObject CreateDropdown()
         {
-            bool tmp = instance.isTMPPresent;
-            GameObject blank = new GameObject();
-            blank.name = "Dropdown";
-            blank.AddComponent<RectTransform>();
-            blank.AddComponent<CanvasRenderer>();
-            blank.GetComponent<RectTransform>().sizeDelta = new Vector2(200,50);
-            blank.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f,0.5f);
-            blank.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f,0.5f);
+            GameObject blank = DefaultControls.CreateDropdown(instance.resources);
+            Text[] texts = blank.GetComponents<Text>();
+            foreach(Text txt in texts)
+            {
+                txt.color = Color.black;
+                txt.fontSize = 24;
+            }
             return blank;
-        }*/
+        }
         public static GameObject CreateInputField()
         {
             GameObject blank = CreateImage();
