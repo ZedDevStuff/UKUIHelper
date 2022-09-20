@@ -62,8 +62,18 @@ namespace UKUIHelper
             texture.LoadImage(File.ReadAllBytes(path));
             return Sprite.Create(texture, new Rect(0, 0,texture.width,texture.height),new Vector2(0.5f, 0.5f),pixelsPerUnit,0,SpriteMeshType.Tight,border);
         }
-        public static GameObject CreateButton()
+        public static GameObject CreateButton(bool ukStyle = false)
         {
+            ColorBlock colors = new ColorBlock()
+            {
+                normalColor = new Color(0,0,0,0.512f),
+                highlightedColor = new Color(1,1,1,0.502f),
+                pressedColor = new Color(1,0,0,1),
+                selectedColor = new Color(0,0,0,0.512f),
+                disabledColor = new Color(0.7843f,0.7843f,0.7843f,0.502f),
+                colorMultiplier = 1f,
+                fadeDuration = 0.1f
+            };
             GameObject blank = new GameObject();
             blank.name = "Button";
             blank.AddComponent<RectTransform>();
@@ -76,6 +86,7 @@ namespace UKUIHelper
             blank.GetComponent<Image>().sprite = instance.sprite;
             blank.GetComponent<Image>().type = Image.Type.Sliced;
             blank.GetComponent<Button>().targetGraphic = blank.GetComponent<Image>();
+            if(ukStyle) blank.GetComponent<Button>().colors = colors;
 
             GameObject text = CreateText();
             text.name = "Text";
