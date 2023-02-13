@@ -35,11 +35,11 @@ namespace UKUIHelper
             Texture2D texture1 = new Texture2D(200, 200);
             Texture2D texture2 = new Texture2D(64, 64);
             Texture2D texture3 = new Texture2D(64, 64);
-            texture1.LoadImage(File.ReadAllBytes(workDir + "\\Sprites\\Sprite.png")); 
+            texture1.LoadImage(Resources.Sprite); 
             sprite = Sprite.Create(texture1, new Rect(0, 0, 200, 200), new Vector2(0.5f, 0.5f),200f,0,SpriteMeshType.Tight,new Vector4(15,15,15,15));
-            texture2.LoadImage(File.ReadAllBytes(workDir + "\\Sprites\\Checkmark.png")); 
+            texture2.LoadImage(Resources.Checkmark); 
             checkMarkSprite = Sprite.Create(texture2, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f),64f,0,SpriteMeshType.Tight);
-            texture3.LoadImage(File.ReadAllBytes(workDir + "\\Sprites\\Dropdown.png")); 
+            texture3.LoadImage(Resources.Dropdown); 
             dropDownSprite = Sprite.Create(texture3, new Rect(0, 0, 64, 64), new Vector2(0.5f, 0.5f),64f,0,SpriteMeshType.Tight);
             resources.background = sprite;
             resources.checkmark = checkMarkSprite;
